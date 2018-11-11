@@ -3,6 +3,7 @@
 ## by Sean Erik O'Connor
 
 http://www.seanerikoconnor.freeservers.com/
+
 http://www.seanerikoconnor.freeservers.com/Mathematics/AbstractAlgebra/PrimitivePolynomials/overview.html
 
 source code

@@ -1,3 +1,4 @@
+# may work with older cmake - was not tested
 cmake_minimum_required(VERSION 3.10)
 
 project( PrimitivePolynomialsC  CXX C)
@@ -7,6 +8,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+# enable debug
+# add_definitions( -DDEBUG_PP_PRIMPOLY )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
  -O3 -mfpmath=sse -msse2 -msse3 -msse4.2 -ffast-math \

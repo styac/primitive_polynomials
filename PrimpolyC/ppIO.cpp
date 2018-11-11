@@ -44,7 +44,7 @@
 #include <stdlib.h> /* for _MAX_PATH */
 
 #include "Primpoly.h"
-
+#include "ppIO.h"
 
 /*==============================================================================
 |                               parse_command_line                             |

@@ -45,7 +45,7 @@
 #include <stdlib.h> /* for rand() function */
 
 #include "Primpoly.h"
-#include "ppOrder.h"
+
 
 /*==============================================================================
 |                                order_m                                       |
@@ -97,54 +97,10 @@ BUGS
 
     None.
 
---------------------------------------------------------------------------------
-|                                Function Call                                 |
-------------------------------------------------------------------------------*/
+*/
 
-int
-    order_m( int power_table[][ MAXDEGPOLY ], int n, int p, bigint r,
-             bigint * primes, int prime_count )
-{
-
-/*------------------------------------------------------------------------------
-|                               Local Variables                                |
-------------------------------------------------------------------------------*/
-
-int
-    i,                  /*  Loop counter.  */
-    g[ MAXDEGPOLY ] ;   /* g(x) = x ^ m (mod f(x), p) */
-
-bigint
-    m ;                 /*  Exponent of m. */
-
-/*------------------------------------------------------------------------------
-|                                Function Body                                 |
-------------------------------------------------------------------------------*/
-
-for (i = 0 ;  i <= prime_count ;  ++i)
-
-    if (!skip_test( i, primes, p ))
-    {
-        m = r / primes[ i ] ;
-
-        x_to_power( m, g, power_table, n, p ) ;
-
-        #ifdef DEBUG_PP_PRIMPOLY
-        printf( "    order m test for prime = %lld, x^ m = x ^ %lld = ", primes[i], m ) ;
-        write_poly( g, n-1 ) ;
-        printf( "\n\n" );
-        #endif
-
-        if (is_integer( g, n-1 ))
-
-            return( NO ) ;
-    }
-
-return( YES ) ;
-
-} /* ====================== end of function order_m ========================= */
-
-
+int order_m( int power_table[][ MAXDEGPOLY ], int n, int p, bigint r,
+             bigint * primes, int prime_count );
 
 /*==============================================================================
 |                                order_r                                       |
@@ -181,42 +137,9 @@ METHOD
 BUGS
 
     None.
+*/
 
---------------------------------------------------------------------------------
-|                                Function Call                                 |
-------------------------------------------------------------------------------*/
-
-int
-    order_r( int power_table[][ MAXDEGPOLY ], int n, int p, bigint r, int * a )
-{
-
-/*------------------------------------------------------------------------------
-|                               Local Variables                                |
-------------------------------------------------------------------------------*/
-
-int
-    g[ MAXDEGPOLY ] ;   /* g(x) = x ^ m (mod f(x), p) */
-
-/*------------------------------------------------------------------------------
-|                                Function Body                                 |
-------------------------------------------------------------------------------*/
-
-x_to_power( r, g, power_table, n, p ) ;
- 
-#ifdef DEBUG_PP_PRIMPOLY
-printf( "    order r test for x^r = x ^ %lld = ", r ) ;
-write_poly( g, n-1 ) ;
-printf( "\n\n" );
-#endif
-
-/*  Return the value a = constant term of g(x) */
-*a = g[ 0 ] ;
-
-return( is_integer( g, n-1 ) ? YES : NO  ) ;
-
-} /* ====================== end of function order_r ========================= */
-
-
+int order_r( int power_table[][ MAXDEGPOLY ], int n, int p, bigint r, int * a );
 
 /*==============================================================================
 |                                  maximal_order                               |
@@ -261,40 +184,7 @@ METHOD
 BUGS
 
     None.
+*/
 
---------------------------------------------------------------------------------
-|                                Function Call                                 |
-------------------------------------------------------------------------------*/
+int maximal_order( int * f, int n, int p );
 
-int maximal_order( int * f, int n, int p )
-{
-    int g[ MAXDEGPOLY ] ;   /* g(x) = x ^ m (mod f(x), p) */
-    bigint maxOrder ;
-    bigint k ;
-    int power_table[ MAXDEGPOLY - 1 ] [ MAXDEGPOLY ] ;    /*  x ^ n , ... , x ^ 2n-2 (mod f(x), p) */
-
-    /*                         n         2n-2
-        Precompute the powers x ,  ..., x     (mod f(x), p)
-        for use in all later computations.
-    */
-    construct_power_table( power_table, f, n, p ) ;
-
-    /*  Highest possible order for x. */
-    maxOrder = power( p, n ) - 1 ;
-
-    for (k = 1 ;  k <= maxOrder ;  ++k)
-    {
-        x_to_power( k, g, power_table, n, p ) ;
-
-        if (is_integer( g, n-1 ) &&
-            g[0] == 1 &&
-            k < maxOrder)
-        {
-            return 0 ;
-        }
-
-    } /* end for k */
-
-    return 1 ;
-
-} /* ================= end of function maximal_order ======================== */

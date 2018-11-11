@@ -45,6 +45,12 @@
 #include <math.h>
 
 #include "Primpoly.h"
+#include "ppArith.h"
+#include "ppHelperFunc.h"
+#include "ppIO.h"
+#include "ppOrder.h"
+#include "ppPolyArith.h"
+
 
 
 /*==============================================================================
@@ -189,8 +195,7 @@ int
 
 char outputFormat[ _MAX_PATH ] ; /* Formatting for printf's (used only when printing bigints) */
 
-char * legalNotice = 
-{
+const char * legalNotice =
     "\n"
     "Primpoly Version 13.0 - A Program for Computing Primitive Polynomials.\n"
     "Copyright (C) 1999-2018 by Sean Erik O'Connor.  All Rights Reserved.\n"
@@ -199,10 +204,9 @@ char * legalNotice =
     "GNU General Public License.  This is free software, and you are welcome\n"
     "to redistribute it under certain conditions; see the GNU General Public License\n"
     "for details.\n\n"
-}  ;
+;
 
-char * help =
-{
+const char * help =
      "This program generates a primitive polynomial of degree n modulo p.\n\n"
          "Usage:    primpoly p n\n\n"
          "Example:  primpoly 2 4 \n"
@@ -225,7 +229,7 @@ char * help =
      "   pp -a 2 4\n"
      "       lists ALL primitive polynomials of degree 4 modulo 2.\n"
      "\n\n"
-} ;
+;
 
 /*------------------------------------------------------------------------------
 |                                Function Body                                 |

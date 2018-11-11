@@ -1,0 +1,359 @@
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 2 of degree 2
+
+ x ^ 2 +  x + 1
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 2 of degree 17
+
+ x ^ 17 +  x ^ 3 + 1
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 2 of degree 43
+
+ x ^ 43 +  x ^ 6 +  x ^ 4 +  x ^ 3 + 1
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 2 of degree 62
+
+ x ^ 62 +  x ^ 6 +  x ^ 5 +  x ^ 3 + 1
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 3 of degree 30
+
+ x ^ 30 +  x + 2
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 5 of degree 22
+
+ x ^ 22 +  x ^ 2 +  x + 3
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 7 of degree 16
+
+ x ^ 16 + 2 x + 3
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 17 of degree 14
+
+ x ^ 14 +  x ^ 2 + 2 x + 6
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 137 of degree 7
+
+ x ^ 7 +  x + 3
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 223 of degree 8
+
+ x ^ 8 +  x + 51
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+
+
+
+Primitive polynomial modulo 557 of degree 6
+
+ x ^ 6 +  x + 5
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+Factoring r = 15 into
+    3 5 
+
+Total number of primitive polynomials = 2.  Begin testing...
+
+
+
+
+
+Primitive polynomial modulo 2 of degree 4
+
+ x ^ 4 +  x + 1
+
+
++--------- Statistics -----------------------------------------------------------------
+|
+| Total num. degree   4 polynomials mod   2 :    16
+| Actually tested :                              4
+| Const. coeff. was primitive root :               2
+| Free of linear factors :                         1
+| Irreducible or irred. to power :                 1
+| Had order r (x^r = integer) :                    1
+| Passed const. coeff. test :                      1
+| Had order m (x^m != integer) :                   1
+|
++--------------------------------------------------------------------------------------
+
+Confirming polynomial is primitive with an independent check.
+Warning:  You may wait an impossibly long time!
+
+    -Polynomial is confirmed to be primitive.
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+
+Factoring r = 121 into
+    11^2 
+
+Total number of primitive polynomials = 22.  Begin testing...
+
+
+
+
+
+Primitive polynomial modulo 3 of degree 5
+
+ x ^ 5 + 2 x + 1
+
+
++--------- Statistics -----------------------------------------------------------------
+|
+| Total num. degree   5 polynomials mod   3 :    243
+| Actually tested :                              8
+| Const. coeff. was primitive root :               3
+| Free of linear factors :                         1
+| Irreducible or irred. to power :                 1
+| Had order r (x^r = integer) :                    1
+| Passed const. coeff. test :                      1
+| Had order m (x^m != integer) :                   1
+|
++--------------------------------------------------------------------------------------
+
+Confirming polynomial is primitive with an independent check.
+Warning:  You may wait an impossibly long time!
+
+    -Polynomial is confirmed to be primitive.
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+Total number of primitive polynomials = 6.  Begin testing...
+
+
+
+Primitive polynomial 1 of 6 modulo 2 of degree 5
+
+ x ^ 5 +  x ^ 2 + 1
+
+
+
+
+Primitive polynomial 2 of 6 modulo 2 of degree 5
+
+ x ^ 5 +  x ^ 3 + 1
+
+
+
+
+Primitive polynomial 3 of 6 modulo 2 of degree 5
+
+ x ^ 5 +  x ^ 3 +  x ^ 2 +  x + 1
+
+
+
+
+Primitive polynomial 4 of 6 modulo 2 of degree 5
+
+ x ^ 5 +  x ^ 4 +  x ^ 2 +  x + 1
+
+
+
+
+Primitive polynomial 5 of 6 modulo 2 of degree 5
+
+ x ^ 5 +  x ^ 4 +  x ^ 3 +  x + 1
+
+
+
+
+Primitive polynomial 6 of 6 modulo 2 of degree 5
+
+ x ^ 5 +  x ^ 4 +  x ^ 3 +  x ^ 2 + 1
+
+
+
+
+
+ - A Program for Computing Primitive Polynomials.
+
+Primpoly comes with ABSOLUTELY NO WARRANTY; for details see the
+GNU General Public License.  This is free software, and you are welcome
+to redistribute it under certain conditions; see the GNU General Public License
+for details.
+
+ERROR:  Expecting two arguments, p and n.
+
+This program generates a primitive polynomial of degree n modulo p.
+
+Usage:    primpoly p n
+
+Example:  primpoly 2 4 
+          generates the fourth degree polynomial
+
+          x ^ 4 + x + 1, whose coefficients use modulo 2 arithmetic.
+
+Primitive polynomials find many uses in mathematics and communications 
+engineering:
+   * Generation of pseudonoise (PN) sequences for spread spectrum
+     communications and chip fault testing.
+   * Generation of CRC and Hamming codes.
+   * Generation of Galois (finite) fields for use in decoding Reed-Solomon
+     and BCH error correcting codes.
+
+Options:
+   pp -c 2 4
+       does an addtional time consuming double check on the primitivity.
+   pp -s 2 4
+       prints search statistics.
+   pp -a 2 4
+       lists ALL primitive polynomials of degree 4 modulo 2.
+
+

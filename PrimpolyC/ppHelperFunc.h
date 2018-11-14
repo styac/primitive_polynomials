@@ -1,3 +1,4 @@
+#pragma once
 /*==============================================================================
 | 
 |  File Name:     
@@ -46,12 +47,9 @@
 |                                Include Files                                 |
 ------------------------------------------------------------------------------*/
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-
 #include "Primpoly.h"
-
 
 /*==============================================================================
 |                             initial_trial_poly                               |
@@ -492,20 +490,3 @@ BUGS
 
 int find_nullity( int ** Q, int n, int p );
 
-
-#if 0
-int test
-    /*                         n         2n-2
-        Precompute the powers x ,  ..., x     (mod f(x), p)
-        for use in all later computations.
-    */
-n = 4 ; p = 5 ;
-f[0] = 2 ; f[1] = 3 ; f[2] = 3 ; f[3] = 3 ; f[4] = 1 ;
-
-construct_power_table( power_table, f, n, p ) ;
-if (has_multi_irred_factors( power_table, n, p ) == 1)
-    printf( "Pass\n" ) ;
-else
-    printf( "Fail\n" ) ;
-
-#endif

@@ -12,6 +12,10 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # enable debug
 # add_definitions( -DDEBUG_PP_PRIMPOLY )
 
+# use 128 bit bigint
+# tested only on linux with gcc 7.3.1 other platform may not work
+add_definitions( -DBIGINT_128 )
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
  -O3 -mfpmath=sse -msse2 -msse3 -msse4.2 -ffast-math \
  -mfma -mfma4  \

@@ -40,8 +40,9 @@
 |                                Include Files                                 |
 ------------------------------------------------------------------------------*/
 
-#include <stdio.h>  /* for printf()  */
 #include <stdlib.h> /* for _MAX_PATH */
+#include <fstream>
+#include <iomanip>
 
 #include "Primpoly.h"
 #include "ppIO.h"
@@ -99,225 +100,219 @@ int parse_command_line( int    argc,
                         int *  selfCheck,
                         int *  p,
                         int *  n,
-                        int *  testPolynomial )
+                        int *  testPolynomial,
+                        int *  print_hex
+                        )
 {
+    int    input_arg_index;
+    char * input_arg_string;
+    char * option_ptr;
 
-int    input_arg_index ;
-char * input_arg_string ;
-char * option_ptr ;
+    int    num_arg;
+    char * arg_string[ _MAX_PATH ];
 
-int    num_arg ;
-char * arg_string[ _MAX_PATH ] ;
+    /*  Initialize to defaults. */
+    *testPolynomialForPrimitivity = NO;
+    *listAllPrimitivePolynomials  = NO;
+    *printStatistics              = NO;
+    *printHelp                    = NO;
+    *selfCheck                    = NO;
+    *print_hex                    = NO;
+    *p                            = 0;
+    *n                            = 0;
+    testPolynomial                = (int *) 0;
 
-/*  Initialize to defaults. */
-*testPolynomialForPrimitivity = NO ;
-*listAllPrimitivePolynomials  = NO ;
-*printStatistics              = NO ;
-*printHelp                    = NO ;
-*selfCheck                    = NO ;
-*p                            = 0 ;
-*n                            = 0 ;
-testPolynomial                = (int *) 0 ;
+    /*
+     *  Parse the command line to get the options and their inputs.
+     */
 
-
-/*
- *  Parse the command line to get the options and their inputs.
- */
-
-for (input_arg_index = 0, num_arg = 0 ;  input_arg_index < argc ;  
-     ++input_arg_index)
-{
-    /*  Get next argument string. */
-    input_arg_string = argv[ input_arg_index ] ;
-
-    /* We have an option:  a hyphen followed by a non-null string. */
-    if (input_arg_string[ 0 ] == '-' && input_arg_string[ 1 ] != '\0')
+    for (input_arg_index = 0, num_arg = 0;  input_arg_index < argc;
+         ++input_arg_index)
     {
-        /* Scan all options. */
-        for (option_ptr = input_arg_string + 1 ;  *option_ptr != '\0' ;
-             ++option_ptr)
+        /*  Get next argument string. */
+        input_arg_string = argv[ input_arg_index ];
+
+        /* We have an option:  a hyphen followed by a non-null string. */
+        if (input_arg_string[ 0 ] == '-' && input_arg_string[ 1 ] != '\0')
         {
-            switch( *option_ptr )
+            /* Scan all options. */
+            for (option_ptr = input_arg_string + 1;  *option_ptr != '\0';
+                 ++option_ptr)
             {
-                /* Test a given polynomial for primitivity. */
-                case 't':
-                    *testPolynomialForPrimitivity = YES ;
-                break ;
+                switch( *option_ptr )
+                {
+                    /* Test a given polynomial for primitivity. */
+                    case 't':
+                        *testPolynomialForPrimitivity = YES;
+                    break;
 
-                /* List all primitive polynomials.  */
-                case 'a':
-                   *listAllPrimitivePolynomials = YES ;
-                break ;
+                    /* List all primitive polynomials.  */
+                    case 'a':
+                       *listAllPrimitivePolynomials = YES;
+                    break;
 
-                /* Print statistics on program operation. */
-                case 's':
-                   *printStatistics = YES ;
-                break ;
+                    /* Print statistics on program operation. */
+                    case 's':
+                       *printStatistics = YES;
+                    break;
 
-                /* Print help. */
-                case 'h':
-				case 'H':
-                    *printHelp = YES ;
-                break ;
+                    /* Print help. */
+                    case 'h':
+                    case 'H':
+                        *printHelp = YES;
+                    break;
 
-                /* Turn on all self-checking (slow!).  */
-                case 'c':
-					*selfCheck = YES ;
-                break ;
+                    /* Turn on all self-checking (slow!).  */
+                    case 'c':
+                        *selfCheck = YES;
+                    break;
 
-                default:
-                   printf( "Cannot recognize the option %c\n", *option_ptr ) ;
-                break ;
+                    /* hex print */
+                    case 'x':
+                        *print_hex = YES;
+                    break;
+
+                    default:
+                        std::cout << "Cannot recognize the option " << *option_ptr << std::endl;
+                    break;
+                }
             }
         }
+        else  /* Not an option, but an argument. */
+        {
+            arg_string[ num_arg++ ] = input_arg_string;
+        }
     }
-    else  /* Not an option, but an argument. */
+
+
+    /* Assume the next two arguments are p and n. */
+    if (num_arg == 3)
     {
-        arg_string[ num_arg++ ] = input_arg_string ;
+        *p = atoi( arg_string[ 1 ] );
+        *n = atoi( arg_string[ 2 ] );
+
     }
-}
+    else
+    {
+        std::cout <<"ERROR:  Expecting two arguments, p and n.\n\n"  << std::endl;
+        *printHelp = YES;
+    }
 
-
-/* Assume the next two arguments are p and n. */
-if (num_arg == 3)
-{
-    *p = atoi( arg_string[ 1 ] ) ;
-    *n = atoi( arg_string[ 2 ] ) ;
-
-}
-else
-{
-    printf( "ERROR:  Expecting two arguments, p and n.\n\n" ) ;
-	*printHelp = YES ;
-}
-
-return 0 ;
-
+    return 0;
 } /* ================ end of function parse_command_line ==================== */
 
-
-/*==============================================================================
-|                                    write_poly                                |
-================================================================================
-
-DESCRIPTION
-
-     Print a polynomial in a nice format.  Omit terms with coefficients of zero.
-     Suppress coefficients of 1, but not the constant term.  Put every
-     NUMTERMSPERLINE terms in the polynomial on a new line.
-
-INPUT
-                                                                     n
-     a[]  (int *)  Coefficients of the nth degree polynomial a(x) = a x  + ...
-                                                                     n
-                   + a  x  +  a.    a  is stored at array location a[i], 
-                      1        0     i
-                   0 <= i < n .
-
-     n    (int)    The polynomial's degree.
-
-OUTPUT
-
-    Standard output    A pretty-printed polynomial.
-
-EXAMPLE CALLING SEQUENCE
-
-    If array a[] contains 
-
-    a[0] = 1
-    a[1] = 2
-    a[2] = 0
-    a[3] = 1
-
-    and n = 3,
-
-    write_poly( a, n ) prints
-
-    x ^ 3  +  2 x  + 1
-
-METHOD
-
-    Sheer hacking ingenuity (vulgarity?).
-
-BUGS
-
-    None.
-
---------------------------------------------------------------------------------
-|                                Function Call                                 |
-------------------------------------------------------------------------------*/
 
 void write_poly( int * a, int n )
 {
 
-/*------------------------------------------------------------------------------
-|                               Local Variables                                |
-------------------------------------------------------------------------------*/
+    int
+        k,                         /*  Loop conter. */
+        coeff,                     /*  Coefficient a sub k.  */
+        first_time_through = YES,  /* = NO after printing the first coefficient. */
+        num_terms = 0;            /*  Number of terms printed so far.  */
 
-int
-    k,                         /*  Loop conter. */
-    coeff,                     /*  Coefficient a sub k.  */
-    first_time_through = YES,  /* = NO after printing the first coefficient. */
-    num_terms = 0 ;            /*  Number of terms printed so far.  */
+        for (k = n;  k >= 0;  --k)
+        {
 
-/*------------------------------------------------------------------------------
-|                                Function Body                                 |
-------------------------------------------------------------------------------*/
+            /*
+                              k
+            Print the term a x  if a  is nonzero.
+                            k       k
+            */
 
-for (k = n ;  k >= 0 ;  --k)
-{
+            if ( (coeff = a[ k ]) != 0)
+            {
 
-    /*                    
-                      k 
-    Print the term a x  if a  is nonzero.
-                    k       k
-    */
+               /* After the first time thorough, print leading plus signs "+" to
+                  separate the terms of the polynomial. */
 
-    if ( (coeff = a[ k ]) != 0)
-    {
+                if (!first_time_through)
+                    std::cout << " + ";
 
-       /* After the first time thorough, print leading plus signs "+" to 
-          separate the terms of the polynomial. */
+                first_time_through = NO;
 
-        if (!first_time_through)
+                /* Always print the constant term a  but print terms of higher degree
+                                                   0
+                   only if a  is not 1.
+                            k             */
 
-            printf( " + " ) ;
+                if ( (coeff != 1) || (k == 0) )
+                    std::cout << coeff;
 
-        first_time_through = NO ;
+                /*                  k                             1      0
+                    Print the term x.  Exceptions:  print x, not x, omit x  */
 
-        /* Always print the constant term a  but print terms of higher degree
-                                           0 
-           only if a  is not 1.
-                    k             */
+                if (k > 1)
+                    std::cout << "x^" << k;
 
-        if ( (coeff != 1) || (k == 0) )
+                else if (k == 1)
+                    std::cout << " x";
 
-            printf( "%d", coeff ) ;
+                /*  Start a new line. */
 
+                if (++num_terms % NUMTERMSPERLINE == 0)
 
-        /*                  k                             1      0
-            Print the term x.  Exceptions:  print x, not x, omit x  */
+                    std::cout << std::endl;
 
-        if (k > 1)
+            } /* end if coeff > 0 */
 
-            printf( " x ^ %d", k ) ;
+        } /* end for */
 
-        else if (k == 1)
-
-            printf( " x" ) ;
-
-        /*  Start a new line. */
-
-        if (++num_terms % NUMTERMSPERLINE == 0)
-
-            printf( "\n" ) ;
-
-    } /* end if coeff > 0 */
-
-} /* end for */
-
-printf( "\n" ) ;
-
-return ;
-
+        std::cout << std::endl;
 } /* ======================= end of function write_poly ===================== */
+
+void write_poly_hex( int * a, int n, std::ofstream& file )
+{
+    std::uint64_t high = 0u;
+    std::uint64_t low = 0u;
+    int width = n/4;
+
+    if( n > 64 )
+    {
+        width = 16;
+        for( int i=MAXDEGPOLY; i>64; --i )
+        {
+            high *= 2;
+            high |= a[i+1];
+        }
+    }
+    else
+    {
+        if( width <= 2 )
+        {
+            width = 2;
+        }
+        else if( width <= 4 )
+        {
+            width = 4;
+        }
+        else if( width <= 8 )
+        {
+            width = 8;
+        }
+        else
+        {
+            width = 16;
+        }
+    }
+
+    for( int i=63; i>=0; --i )
+    {
+        low *= 2;
+        low |= a[i+1];
+    }
+
+    if( high == 0 )
+    {
+        file << std::hex << std::setw(width) << std::uppercase << std::setfill('0')
+             << low << std::endl;
+    }
+    else
+    {
+        file << std::hex << std::setw(width) << std::uppercase << std::setfill('0')
+             << high << " " << std::setw(width)
+             << low << std::endl;
+    }
+} /* ======================= end of function write_poly_hex ===================== */
+
+

@@ -1,3 +1,5 @@
+#pragma once
+
 /*==============================================================================
 | 
 |  File Name:     
@@ -40,7 +42,6 @@
 |                                Include Files                                 |
 ------------------------------------------------------------------------------*/
 
-#include <stdio.h>  /* for printf()  */
 #include <stdlib.h> /* for _MAX_PATH */
 #include "Primpoly.h"
 
@@ -94,7 +95,9 @@ int parse_command_line( int    argc,
                         int *  selfCheck,
                         int *  p,
                         int *  n,
-                        int *  testPolynomial );
+                        int *  testPolynomial,
+                        int *  print_hex
+                        );
 
 /*==============================================================================
 |                                    write_poly                                |
@@ -145,4 +148,7 @@ BUGS
 */
 
 void write_poly( int * a, int n );
+
+void write_poly_hex( int * a, int n, std::ofstream& file_hex);
+
 

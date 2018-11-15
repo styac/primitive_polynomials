@@ -53,7 +53,6 @@
 #include "ppPolyArith.h"
 #include "ppFactor.h"
 
-
 void initial_trial_poly( int * f, int n )
 {
     int i;

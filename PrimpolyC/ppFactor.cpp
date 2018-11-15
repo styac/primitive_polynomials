@@ -37,7 +37,6 @@
 |
 ==============================================================================*/
 
-
 #include <stdlib.h> /* for rand() function */
 
 #include "Primpoly.h"
@@ -50,7 +49,6 @@
 
 int factor( bigint n, bigint * primes, int * count )
 {
-
     int
         t = 0,              /*  Array index for primes and count.         */
         cnt = 0,            /*  Counter for factors of 2 and 3.           */

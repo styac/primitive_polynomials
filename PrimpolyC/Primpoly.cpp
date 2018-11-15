@@ -434,7 +434,8 @@ int main( int argc, char * argv[] )
                                          << std::endl;
 
                                      write_poly( f, n );
-                                     write_poly_hex( f, n, file_hex);
+                                     if(print_hex)
+                                        write_poly_hex( f, n, file_hex);
                                  }
                              }
                          } /* end const coeff test */
@@ -465,7 +466,8 @@ int main( int argc, char * argv[] )
     {
         std::cout << "\n\nPrimitive polynomial modulo " << p << " of degree " << n << std::endl;
         write_poly( f, n );
-        write_poly_hex( f, n, file_hex);
+        if(print_hex)
+            write_poly_hex( f, n, file_hex);
         std::cout << std::endl;
     }
     else

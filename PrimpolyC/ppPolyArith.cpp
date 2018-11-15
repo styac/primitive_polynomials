@@ -82,7 +82,7 @@ int is_integer( int * t, int n )
         if (t[ n-- ] != 0)
             return( NO );
 
-    return( YES );
+    return YES;
 } /* ====================== end of function is_integer ====================== */
 
 void construct_power_table( int power_table[][ MAXDEGPOLY ], int * f,
@@ -145,7 +145,6 @@ void construct_power_table( int power_table[][ MAXDEGPOLY ], int * f,
 
 int auto_convolve( int * t, int k, int lower, int upper, int p )
 {
-
     int
         sum = 0,      /* Convolution sum. */
         i;           /* Loop counter.    */
@@ -321,7 +320,6 @@ void times_x( int * t, int power_table[][ MAXDEGPOLY ], int n, int p )
     if (coeff != 0)
     {
         for (i = 0;  i <= n - 1;  ++i)
-
             t[ i ] = mod( t[ i ] +
                           mod( coeff * power_table[ 0 ] [ i ], p ),
                           p );
@@ -383,7 +381,6 @@ void x_to_power( bigint m, int * g, int power_table[][ MAXDEGPOLY ], int n, int 
 
     while ( --bit_count > 0 )
     {
-
         m <<= 1;       /*  Expose the next bit. */
 
         square( g, power_table, n, p );

@@ -201,7 +201,6 @@ int parse_command_line( int    argc,
     return 0;
 } /* ================ end of function parse_command_line ==================== */
 
-
 void write_poly( int * a, int n )
 {
 
